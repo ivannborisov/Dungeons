@@ -1,6 +1,10 @@
 class Hero:
 
     def __init__(self, name, title, health, mana, mana_regeneration_rate):
+        if not isinstance(name, str) or not isinstance(title, str) or not\
+                isinstance(health, int) or not isinstance(mana, int) or not\
+                isinstance(mana_regeneration_rate, int):
+            raise TypeError
         self.__name = name
         self.__title = title
         self.__health = health
@@ -12,7 +16,7 @@ class Hero:
         return "{} the {}".format(self.__name, self.__title)
 
     def is_alive(self):
-        pass
+        return self.__health > 0
 
     def get_health(self):
         return self.__health
@@ -28,10 +32,3 @@ class Hero:
 
     def learn(self, spell):
         self.__spell = spell
-
-
-#     def use_spell(self, spell):
-#         if self.can_cast()
-#             return True
-#         else:
-#             raise
