@@ -1,6 +1,7 @@
 import unittest
 
 from Hero import Hero
+from spell import Spell
 
 
 class HeroTest(unittest.TestCase):
@@ -17,8 +18,20 @@ class HeroTest(unittest.TestCase):
     def test_get_mana(self):
         self.assertEqual(100, self.test_hero.get_mana())
 
-    def test_can_cast(self):
-        pass
+    def test_can_cast_without_spell(self):
+        self.assertFalse(self.test_hero.can_cast())
+
+    def test_can_cast_with_affordable_spell(self):
+        s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
+        self.test_hero.learn(s)
+        self.assertTrue(self.test_hero.can_cast())
+
+    def test_can_cast_with_unaffordable_spell(self):
+        s = Spell(name="Fireball", damage=30, mana_cost=150, cast_range=2)
+        self.test_hero.learn(s)
+        self.assertFalse(self.test_hero.can_cast())
+
+
 
 if __name__ == '__main__':
     unittest.main()

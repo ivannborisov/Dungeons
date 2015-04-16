@@ -11,6 +11,9 @@ class Hero:
     def known_as(self):
         return "{} the {}".format(self.__name, self.__title)
 
+    def is_alive(self):
+        pass
+
     def get_health(self):
         return self.__health
 
@@ -18,10 +21,14 @@ class Hero:
         return self.__mana
 
     def can_cast(self):
-        if(self.__spell is not None or self.__mana < self.__spell.mana_cost):
+        if self.__spell is None or self.__mana < self.__spell.mana_cost:
             return False
         else:
             return True
+
+    def learn(self, spell):
+        self.__spell = spell
+
 
 #     def use_spell(self, spell):
 #         if self.can_cast()
