@@ -1,6 +1,10 @@
 class Hero:
 
     def __init__(self, name, title, health, mana, mana_regeneration_rate):
+        if not isinstance(name, str) or not isinstance(title, str) or not\
+                isinstance(health, int) or not isinstance(mana, int) or not\
+                isinstance(mana_regeneration_rate, int):
+            raise TypeError
         self.__name = name
         self.__title = title
         self.__health = health
@@ -11,6 +15,9 @@ class Hero:
     def known_as(self):
         return "{} the {}".format(self.__name, self.__title)
 
+    def is_alive(self):
+        return self.__health > 0
+
     def get_health(self):
         return self.__health
 
@@ -18,13 +25,10 @@ class Hero:
         return self.__mana
 
     def can_cast(self):
-        if(self.__spell is not None or self.__mana < self.__spell.mana_cost):
+        if self.__spell is None or self.__mana < self.__spell.mana_cost:
             return False
         else:
             return True
 
-#     def use_spell(self, spell):
-#         if self.can_cast()
-#             return True
-#         else:
-#             raise
+    def learn(self, spell):
+        self.__spell = spell
