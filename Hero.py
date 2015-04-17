@@ -39,7 +39,7 @@ class Hero:
             self.__health = 0
         else:
             self.__health -= damage
-
+ 
     def take_healing(self, healing_points):
 
         if self.__health == 0:
