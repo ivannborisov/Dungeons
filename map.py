@@ -15,7 +15,7 @@ class Map:
     def print_map(self):
         for element in self.txt_map:
             for a in element:
-                print(a, end = '')
+                print(a, end='')
             print()
 
     def spawn(self):
@@ -82,3 +82,14 @@ class Map:
         h_r = self.hero_row
         h_c = self.hero_column
         print(element)
+
+#    def hero_attack(self, by=None, direction):
+#        directions = {'up': -1, 'down': 1, 'left': -1, 'right': 1}
+#        attack_range = 2
+#        i = 1
+#        if by is None:
+#            while i <= attack_range:
+#                pos = directions[direction] * i
+#                if direction == left or direction == right:
+#                    if(self.txt_map[self.hero_row][self.hero_column+pos] == 'Enemy'):
+#                        print('Fight started')
