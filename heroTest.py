@@ -1,6 +1,6 @@
 import unittest
 
-from Hero import Hero
+from hero import Hero
 from spell import Spell
 
 

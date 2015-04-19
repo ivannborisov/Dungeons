@@ -1,4 +1,4 @@
-class Hero:
+class Hero():
 
     def __init__(self, name, title, health, mana, mana_regeneration_rate):
         if not isinstance(name, str) or not isinstance(title, str) or not\
@@ -11,6 +11,7 @@ class Hero:
         self.__mana = mana
         self.__mana_regeneration_rate = mana_regeneration_rate
         self.__spell = None
+        self.__weapon = None
 
     def known_as(self):
         return "{} the {}".format(self.__name, self.__title)
@@ -39,7 +40,7 @@ class Hero:
             self.__health = 0
         else:
             self.__health -= damage
- 
+
     def take_healing(self, healing_points):
 
         if self.__health == 0:
@@ -53,6 +54,9 @@ class Hero:
 
     def learn(self, spell):
         self.__spell = spell
+
+    def equip(self, weapon):
+        self.__weapon = weapon
 
     def take_mana(self, mana_points=False, potion=False):
         if mana_points is not False:
