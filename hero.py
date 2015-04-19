@@ -34,7 +34,7 @@ class Hero():
         self.__mana = mana
 
     def can_cast(self):
-        if self.__spell is None or self.__mana < self.__spell.mana_cost:
+        if self.__spell is None or self.__mana < self.__spell.get_mana_cost():
             return False
         else:
             return True
@@ -69,3 +69,11 @@ class Hero():
                 self.__mana = self.__max_mana
         if potion is not False:
             self.__mana += potion.vol  # 6te pi6em li class Potion?
+
+    def attack(self, by):
+        if by == 'weapon' and self.__weapon is not None:
+            return self.__weapon.get_damage()
+        elif by == 'magic' and self.can_cast():
+            return self.__spell.get_damage()
+        else:
+            return 0

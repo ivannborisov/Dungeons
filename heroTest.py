@@ -2,6 +2,7 @@ import unittest
 
 from hero import Hero
 from spell import Spell
+from weapon import Weapon
 
 
 class HeroTest(unittest.TestCase):
@@ -70,6 +71,22 @@ class HeroTest(unittest.TestCase):
         self.test_hero.set_mana(40)
         self.test_hero.take_mana(mana_points=20)
         self.assertEqual(60, self.test_hero.get_mana())
+
+    def test_attack_with_available_weapon(self):
+        w = Weapon(name="The Axe of Destiny", damage=20)
+        self.test_hero.equip(w)
+        self.assertEqual(20, self.test_hero.attack('weapon'))
+
+    def test_attack_with_weapon_without_weapon(self):
+        self.assertEqual(0, self.test_hero.attack('weapon'))
+
+    def test_attack_with_available_magic(self):
+        s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
+        self.test_hero.learn(s)
+        self.assertEqual(30, self.test_hero.attack('magic'))
+
+    def test_attack_with_magic_without_magic(self):
+        self.assertEqual(0, self.test_hero.attack('magic'))
 
 
 if __name__ == '__main__':
