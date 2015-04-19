@@ -3,15 +3,13 @@ import unittest
 from hero import Hero
 from spell import Spell
 from weapon import Weapon
+from hero_enemy_base import HeroEnemyBase
 
 
-class HeroTest(unittest.TestCase):
+class HeroEnemyBaseTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_hero = Hero("Ivan", "Ricar", 80, 70, 2)
-
-    def test_known_as(self):
-        self.assertEqual("Ivan the Ricar", self.test_hero.known_as())
+        self.test_hero = HeroEnemyBase(80, 70)
 
     def test_is_alive(self):
         self.assertTrue(self.test_hero.is_alive())
