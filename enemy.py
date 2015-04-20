@@ -1,10 +1,12 @@
 class Enemy:
 
-    def __init__(self, health, mana, damage):
+    def __init__(self, health, mana, damage, row, column):
         self.__health = health
         self.__mana = mana
         self.__damage = damage
         self.__spell = None
+        self.row = row
+        self.column = column
 
     def can_cast(self):
         if self.__spell is None or self.__mana < self.__spell.mana_cost:

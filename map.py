@@ -1,4 +1,5 @@
 from random import randint  # za zar4eto posle
+from enemy import Enemy
 
 
 class Map:
@@ -11,6 +12,7 @@ class Map:
         self.hero_row = None
         self.hero_column = None
         self.spawn_positions = []
+        self.enemies = []
 
     def print_map(self):
         for element in self.txt_map:
@@ -20,6 +22,7 @@ class Map:
 
     def spawn(self):
         spawn = 0
+        num_enemies = 0
         for row in range(0, len(self.txt_map)):
             for column in range(0, len(self.txt_map[row])):
                 if self.txt_map[row][column] == 'S':
@@ -30,6 +33,10 @@ class Map:
                         self.txt_map[row][column] = 'H'
                     else:
                         self.spawn_positions.append([row, column])
+                if self.txt_map[row][column] == 'E':
+                    self.enemies.append(Enemy(100, 100, 5, row, column))
+                    num_enemies += 1
+
         if spawn is not 0:
             return True
         return False
@@ -83,13 +90,34 @@ class Map:
         h_c = self.hero_column
         print(element)
 
-#    def hero_attack(self, by=None, direction):
-#        directions = {'up': -1, 'down': 1, 'left': -1, 'right': 1}
-#        attack_range = 2
-#        i = 1
-#        if by is None:
-#            while i <= attack_range:
-#                pos = directions[direction] * i
-#                if direction == left or direction == right:
-#                    if(self.txt_map[self.hero_row][self.hero_column+pos] == 'Enemy'):
-#                        print('Fight started')
+    def hero_attack(self, direction, by=None):
+        directions = {'up': -1, 'down': 1, 'left': -1, 'right': 1}
+        attack_range = 2
+        is_start_fight = False
+        i = 1
+        if by is None:
+            while i <= attack_range:
+                pos = directions[direction] * i
+                if direction == 'left' or direction == 'right':
+                    if self.txt_map[self.hero_row][self.hero_column+pos] == 'E':
+                        is_start_fight = True
+                        break
+
+                if direction == 'up' or direction == 'down':
+                    if self.txt_map[self.hero_row+pos][self.hero_column] == 'E':
+                        is_start_fight = True
+                        break
+                i += 1
+
+        if is_start_fight:
+            print('Fight started')
+        else:
+            print('Nothing in casting range {}'.format(attack_range))
+
+
+map = Map('level1.txt')
+map.spawn()
+# map.hero_attack(direction='right')
+print(map.enemies)
+print(map.enemies[0].row)
+print(map.enemies[0].column)
