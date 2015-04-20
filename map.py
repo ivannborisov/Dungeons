@@ -13,11 +13,13 @@ class Map:
         self.hero_column = None
         self.spawn_positions = []
         self.enemies = []
+        f.close()
+
 
     def print_map(self):
         for element in self.txt_map:
             for a in element:
-                print(a, end = '')
+                print(a, end='')
             print()
 
     def spawn(self):
@@ -39,6 +41,8 @@ class Map:
 
         if spawn is not 0:
             return True
+
+        print('Game Over!')
         return False
 
     def move_hero(self, position):
@@ -46,23 +50,23 @@ class Map:
         h_c = self.hero_column
 
         if position == 'left':
-            if self.txt_map[h_r][h_c-1] == '#':
+            if self.txt_map[h_r][h_c - 1] == '#':
                 return False
             else:
                 self.hero_column -= 1
                 self.txt_map[h_r][h_c] = '.'
-                self.map_element(self.txt_map[h_r][h_c-1])
-                self.txt_map[h_r][h_c-1] = 'H'
+                self.map_element(self.txt_map[h_r][h_c - 1])
+                self.txt_map[h_r][h_c - 1] = 'H'
                 return True
 
         if position == 'right':
-            if self.txt_map[h_r][h_c+1] == '#':
+            if self.txt_map[h_r][h_c + 1] == '#':
                 return False
             else:
                 self.hero_column += 1
                 self.txt_map[h_r][h_c] = '.'
-                self.map_element(self.txt_map[h_r][h_c+1])
-                self.txt_map[h_r][h_c+1] = 'H'
+                self.map_element(self.txt_map[h_r][h_c + 1])
+                self.txt_map[h_r][h_c + 1] = 'H'
                 return True
 
         if position == 'up':
