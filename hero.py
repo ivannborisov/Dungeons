@@ -5,7 +5,7 @@ class Hero(HeroEnemyBase):
 
     def __init__(self, name, title, health, mana, mana_regeneration_rate):
 
-        super(Hero, self).__init__(health, mana)
+        super(Hero, self).__init__(health, mana, 0, 0)
 
         if not isinstance(name, str) or not isinstance(title, str) or not\
                 isinstance(mana_regeneration_rate, int):
@@ -17,3 +17,6 @@ class Hero(HeroEnemyBase):
 
     def known_as(self):
         return "{} the {}".format(self.__name, self.__title)
+
+    def get_name(self):
+        return self.__name

@@ -5,8 +5,12 @@ class Enemy(HeroEnemyBase):
 
     def __init__(self, health, mana, damage, row, column):
 
-        super(Enemy, self).__init__(health, mana)
+        super(Enemy, self).__init__(health, mana, row, column)
 
         self.__damage = damage  # kogato se naloji da slojim getter
-        self.row = row
-        self.column = column
+
+    def change_enemy_pos(self, row, col):
+        pass
+
+    def get_dmg(self):
+        return self.__damage

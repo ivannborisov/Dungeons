@@ -1,5 +1,5 @@
 class HeroEnemyBase():
-    def __init__(self, health, mana):
+    def __init__(self, health, mana, row, column):
         if not isinstance(health, int) or not isinstance(mana, int):
             raise TypeError
 
@@ -9,6 +9,8 @@ class HeroEnemyBase():
         self.__max_mana = mana
         self.__spell = None
         self.__weapon = None
+        self.row = row
+        self.column = column
 
     def is_alive(self):
         return self.__health > 0
@@ -49,6 +51,9 @@ class HeroEnemyBase():
     def learn(self, spell):
         self.__spell = spell
 
+    def get_spell(self):
+        return self.__spell
+
     def equip(self, weapon):
         self.__weapon = weapon
 
@@ -63,7 +68,10 @@ class HeroEnemyBase():
     def attack(self, by):
         if by == 'weapon' and self.__weapon is not None:
             return self.__weapon.get_damage()
-        elif by == 'magic' and self.can_cast():
+        elif by == 'spell' and self.can_cast():
             return self.__spell.get_damage()
         else:
             return 0
+
+    def full_health(self):
+        self.__health = 100
